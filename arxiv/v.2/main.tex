@@ -8,6 +8,7 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{setspace}
+\usepackage{array}
 \usepackage[hidelinks]{hyperref}
 
 \hypersetup{
@@ -51,7 +52,10 @@ retraceable addressability, and tightly bounded control. The paper does not
 claim a complete contemporary implementation on any single hardware platform.
 It instead argues that the original geometric model remains a credible
 conceptual precursor for low-power embedded autonomy, event-driven local
-execution, and massively parallel asynchronous substrate design.
+execution, and massively parallel asynchronous substrate design. A minimal
+worked example is proposed as the next computational witness: first as a
+functional validation in \texttt{SOFTSIM}, and later as a hardware realization
+path on a GA144-class asynchronous board.
 \end{abstract}
 
 \onehalfspacing
@@ -110,7 +114,9 @@ The paper does not argue that the original geometric algorithm already
 constitutes a complete modern platform implementation. It argues instead that
 the model provides a credible and still-useful substrate concept for the kind
 of low-power local intelligence that current asynchronous embedded systems seek
-to realize.
+to realize. To make that reading more concrete, the revised manuscript also
+identifies a compact two-node worked example that can be validated first in
+\texttt{SOFTSIM} and only afterward carried to native asynchronous hardware.
 
 \section{Problem Context: Edge Sensing, Bounded Autonomy, and Local Data Partitioning}
 
@@ -222,8 +228,9 @@ substrate implementation. It instead provides a geometric use-case for how such
 a substrate can be imagined: as a finite partitioned local data-space in which
 construction history, adjacency, and addressability can support bounded
 intelligence. One possible implementation context for exploring these ideas is
-a GA144-based experimental board such as `Volatco`, but the present paper is
-not a hardware sales document and does not depend on any single board identity.
+a GA144-based experimental board such as \texttt{Volatco}, but the present
+paper is not a hardware sales document and does not depend on any single board
+identity.
 
 \section{Partitioning, Addressability, and Local Execution Semantics}
 
@@ -269,6 +276,52 @@ modest but meaningful:
 
 These are not yet the semantics of a full instruction set or operating system.
 They are the semantics of an architectural substrate concept.
+
+\subsection*{Worked Computational Example}
+
+One useful way to reduce abstraction is to describe a minimal computational
+example in which a partitioned local region is treated as a state-bearing area
+and neighboring relations are used to drive control updates. Consider a compact
+two-node interpretation of the model. One node is reactive and maintains a
+small local state within a bounded partition. A second node is supervisory and
+periodically emits a token that changes the reactive node's mode. In this
+example, the geometry is not acting as a floating metaphor. It defines the
+locality assumptions of the computation: a known region, a known boundary, and
+known adjacency across which updates travel.
+
+In such a mapping, one partition may be interpreted as a bounded local state
+space. Its address, for example $\{5, 0, c : x\}$, identifies not only a data
+slot but a location within a known geometric relation. A neighboring edge or
+ray relation then serves as the permitted path along which supervisory change
+arrives. The reactive node does not need to search a global memory to discover
+where to look. The relevant local structure already exists. The computation is
+therefore bounded in both space and interpretation: the partition stores local
+state, the address anchors that state to a known region, and a token crossing a
+known adjacency relation triggers a mode change or state update.
+
+The value of this example is not that it demonstrates a full deployed runtime.
+Its value is that it gives a concrete bridge from geometric partitioning to
+computational semantics. At the functional level, such an example can be staged
+first in \texttt{SOFTSIM} as a logical witness of distributed behavior. A
+simulator pass can show that a supervisory node changes the local mode of a
+reactive node through a bounded node-and-port organization. A later hardware
+pass on a GA144-class asynchronous board can then test timing, contention,
+power use, and real I/O behavior. That two-step path matters because it
+separates logical validation from physical realization while preserving one
+continuous interpretation of the substrate.
+
+\begin{table}[H]
+\centering
+\caption{Minimal worked-example mapping from geometric substrate terms to a compact two-node computation.}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.29\linewidth}>{\raggedright\arraybackslash}p{0.64\linewidth}}
+\textbf{Geometric term} & \textbf{Computational interpretation} \\
+partition & bounded local state region maintained by the reactive node \\
+local address & known state or mode slot inside that region \\
+adjacency relation & permitted path by which supervisory change arrives \\
+token crossing boundary & explicit local mode transition or state update \\
+two-node organization & minimal witness of bounded local control without global search \\
+\end{tabular}
+\end{table}
 
 \section{Scaling Toward Multi-Node Asynchronous Systems}
 
@@ -350,7 +403,11 @@ complete memory model, arbitration scheme, synchronization discipline, or
 hardware realization. It also does not yet define the exact boundary between
 construction-time knowledge and execution-time knowledge. Those questions are
 not fatal to the paper, but they should be acknowledged as part of the honest
-scope of the argument.
+scope of the argument. The most practical next validation step is therefore a
+staged one: demonstrate the worked example in \texttt{SOFTSIM} as a functional
+check of node-level semantics, then carry the same example onto native
+GA144-class hardware to evaluate timing, coordination, and physical operating
+constraints.
 
 \section{Comparison With Conventional Architectures}
 
@@ -399,8 +456,12 @@ architectural continuity, but it does not yet provide a full distributed
 systems account. The practical value of the paper therefore lies in clarifying
 a still-relevant design intuition: that finite local intelligence can be
 organized through explicit spatial relations rather than only through
-centralized instruction or remote generalized compute. That intuition is the
-main reason the model remains worth preserving, rewriting, and extending.
+centralized instruction or remote generalized compute. A compact worked example
+offers the clearest next step for publication fitness: show the substrate logic
+functionally in \texttt{SOFTSIM}, then report separate hardware realization
+results on a GA144-class platform when available. That intuition, together with
+that validation path, is the main reason the model remains worth preserving,
+rewriting, and extending.
 
 \begin{thebibliography}{99}
 
