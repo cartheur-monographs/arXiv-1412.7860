@@ -1,0 +1,5 @@
+July 2026
+Paper notes
+
+26.07.2026
+    1240: The strongest next move is to build the actual tiny two-node SOFTSIM example so the paper’s new worked-example section points to a real executable witness rather than just a proposed one.
