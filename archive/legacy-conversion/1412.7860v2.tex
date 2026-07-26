@@ -1,0 +1,224 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+
+\raggedbottom
+
+\title{A self-organizing geometric algorithm for autonomous data partitioning}
+\author{Christopher A. Tucker\\Cartheur Robotics\\\texttt{cartheur@gmail.com}}
+\date{}
+
+\newcommand{\paperfigure}[3]{%
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=#2\linewidth]{#1}
+    \caption{#3}
+  \end{figure}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A model of a geometric algorithm is introduced and methodology of its operation is presented for the dynamic partitioning of data spaces.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Geometric algorithm, self-organizing systems, autonomous data partitioning, theory of automata.
+
+\section{Introduction}
+
+Self-organizing algorithms are an efficient means to order complex systems~\cite{ashby1957,simula1999,guerin2004}. The iterative process of drawing a geometric structure possesses the ability of self-organization when creating a connected space in the shortest path~\cite{orlin2010}. Self-organizing motifs encompass entities unto themselves and are a powerful method of representation of abstractions~\cite{pattee1995}.
+
+Geometry, its practical application, and the intellectual problems following have varied little between the ancient Greek to the Renaissance to modern times~\cite{netz1999}. With the advent of the computer, more computationally sophisticated algorithms have been proposed~\cite{graham1972}. Nevertheless, the central difference lies in the amount of complexity considered, in the sense of the number of inputs to the problem and the time required to solve it, parse it, and perform operations on it. In the ancient world, mathematicians dealt with a small number of inputs, calculated by hand with devices such as the straightedge and compass, and paid little attention to the complexity of the algorithm~\cite{toussaint1992}. With the invention of the digital computer, studies of complexity were introduced into computational geometry~\cite{shamos1975}. For computationally elegant algorithms, simplicity is preferable to complexity.
+
+This paper will describe a geometric algorithm drawn using the limited tools of a straightedge and drafting compass by automata. The automata, in the form of goal-seeking agents, obey a rule that dictates they draw the structure with the minimum amount of traveling while visiting each vertex and edge at least once but at most twice. The activity of the automata yields a self-organized structure of equivalent and symmetric dimensions to be leveraged as a partitioned computational data-space of a finite block size.
+
+\section{The methodology of the self-organizing geometric algorithm}
+
+The need for compiling data from high-volume sensor outputs in real-time requires autonomous data partitioning as a computational model. Using auto-sequencing memory address assignments and data counters, the number of times an agent traverses a vertex edge is important due to the demand for efficiency in the algorithm. Ideally, when writing it to the partition, an iterative loop replicating space and addresses information for the transit of data. In this paper, this is the model of a geometric data processor with a level of abstraction reconciled by an algorithm using the method of exhaustion~\cite{ruffa2002,knuth1969}.
+
+The model uses a geometric address generator, demarcated by a coordinate value of three vertices, a variant on the generic address generator comprising a further generalization of direct memory access. Globally, the geometric arguments are a systolic array with a space-time diagram on a generalized Riemann manifold. In terms of stability~\cite{dorst2002}, a central, fundamental vertex that is not derived is required to define the point of symmetry in the shape. This fundamental vertex serves as a point of reference to an arbitrary construct of coordinates at any location for a Cartesian grid in Euclidian space.
+
+Practically speaking, the incoming data stream requires two program sources to control it: Flowware, the paradigm sequence by which the data is input into the array, known by the constructor agents, and configware, how the system knows where the data is located to report to a high-level language compiler to leverage data at run time. Communication of coordinates, in the form of three vertices and a logical space integer, resides in the agent automata and the application layer. This is a model of a reconfigurable data-stream machine and a model of a reconfigurable compiler. The agents create and arrange the compiler and its partitioner in reference to input from a high-level language and partitions the code into geometrically parallelizable streams suitable as a reconfigurable optimizer how locations, in the form of address by the vertices and edges, are determined for the memory utilized by a microprocessor.
+
+Instruction-based von Neumann machines are not appropriate for such operations as execution cannot be determined a priori without first processing data received from sensors~\cite{vonneumann1966}. Rather, a reconfigurable computer or Xputer derived from a generalization of a systolic array represented by the exchange of data between the knowledge retained by its agents and the data residing within is an improvement. Only after knowledge of the data can be reconciled with where it is stored can meaningful arrangements be facilitated~\cite{hartenstein2008}.
+
+In terms of this paper, a set of fundamental laws define how the agents interact with the environment and properties each possess. Some of these abilities are:
+
+\begin{enumerate}
+\item Automata which build the shape on first iteration, traversing the structure only once.
+\item Agents which possess the knowledge of their work for later search operations.
+\item A limit to associated knowledge within the system so data can be exchanged without long wait times to access data and make decisions.
+\item A method to pool data by simple addressing from sensor or other data-intensive hardware and networks.
+\item Present the refined data to a program through an interface.
+\end{enumerate}
+
+In the following sections, the construction of a geometric algorithm and analysis of its order, logic, flow, and complexity will be presented with a focus on connectivity between vertices~\cite{orlin2010}.
+
+\section{The walker-constructor algorithm}
+
+Consider Fig.~1, a closed spatial system consisting of $n$ vertices with $m$ edges, where $n = 10$ and $m = 21$. The shape is constructed by three goal-seeking agents of the form $f : P^{*} \rightarrow A$. The agents possess the abilities to walk, to mark, and to remember, in the scope of a collective task to construct a geometric object with the explicit rule to pass through each vertex and draw the edges only once. They possess a tool, a drafting compass, and have pins and elastic strings.
+
+\paperfigure{extracted-figures/fig1.png}{0.42}{Walker constructor drawn by agents.}
+
+The algorithm has two components: the task and the activity. The task is to observe agents as they perform their task of obeying the rule when constructing the object. The activity begins at any vertex in a spatial grid, regardless of gauge or coordinate; in terms of the execution of the algorithm, the space is considered null. The algorithm is described as: Pick an arbitrary point on a topological manifold, call it $(0,0)$, and run a Cartesian grid in four directions with each ray trajectory 90 degrees from its left and right nearest neighbor where $p = 2$ dimensions. Label one axis $x$ and name the other axis firstly encountered in a counterclockwise rotation $y$.
+
+Create three agents who are programmed identically and whose task is to walk, to mark, and to remember. Between them, they hold two elastic strings. Start each at $(0,0)$: agent $(1)$ walks five units in the positive $y$ direction; agent $(2, 3)$ walk five units in the negative $y$ direction and walk 90 degrees from their path in opposite directions: $(2)$ in the negative $x$ direction 5 units and $(3)$ in the $x$ direction 5 units.
+
+Remember your location on the grid.
+
+Draw tight the first elastic string and pin to the edge points $(1,2,3)$. This is the first polygon of three vertices. Scribe circles with the compass with a diameter of 2 units filled with quantity $\theta$ centered on vertices 2 and 3.
+
+\begin{enumerate}
+\item Cast a ray that intersects point $a$ continuing to twice the distance walked and mark the edge point 4. Save the distance $(d_{4})$.
+\item Walk in the $+y$ direction along the string to the grid coordinate $(2.5,0)$ and mark the point $c$.
+\item Walk in the $+y$ direction along the string to the grid coordinate $(-2.5,0)$ and mark the point $b$.
+\item Cast a ray that intersects the point $c$ continuing the ray to twice the distance traveled and mark the edge point 5. Save the distance $(d_{5})$.
+\item Cast a ray that intersects the point $b$ continuing the ray to twice the distance traveled and mark the edge point 4. Save the distance $(d_{6})$.
+\end{enumerate}
+
+Draw tight the second elastic string and pin to the edge points $(4,5,6)$. This is the second polygon of three vertices. Mark the intersection of the three rays as the center of mass of the triangle centroid as point $m$. A graphical depiction at various points in time of the execution of the algorithm is shown in Fig.~2.
+
+\paperfigure{extracted-figures/fig2.png}{0.88}{Walker constructor progress within algorithm execution.}
+
+The collective behavior of the agents exhibits a Hamiltonian path~\cite{angelini2012}, which is NP-Complete~\cite{skiena1998}. The time to solve the solution takes a longer time than the algorithm to draw it. The walker constructor agents possess the knowledge of the structure and have the ability to perform operations on the space containing it rather than attempting such a solution in any other manner, including access of the spatial zones by application operations. One such operation is the creation of an addressable data partition, illustrated in Fig.~3, that carries the knowledge to self-modify in order to posit data arriving from, for example, sensors about the external environment outside the structure.
+
+\paperfigure{extracted-figures/fig3.png}{0.42}{Data partitions following walker algorithm.}
+
+The addresses of partitions are only noted when it is a non-integral type space, that is, where a partition is not intersected by an interior edge or a ray. Illustrated in Fig.~3, the partition of $\{5, 0, c\}$ has 11 blocks at the edge, 10, 8, 6, 4, and 2 toward the interior, for a total of 41 blocks. A typical address for a block would be $\{5, 0, c : 37\}$. The same number of blocks consist the partition $\{4, 0, b\}$. By symmetry, a set of partitions to the left of the ray $\{0, 3\}$ have the same number of blocks as partitions to the right of the ray. The algorithm can further divide the size of the partition by manipulating the quantity of $\theta$ in its compass tool relative to the length the edge.
+
+\section{Algorithm flow and complexity}
+Fig.~4 is a representation of the adjacency of the vertices of the walker algorithm with both undirected and directed edges. The vertices consisting the inner triangle, $a$, $b$, $c$, with its center point, $m$, as well as the starting vertex, 0, are represented by diamond-shaped nodes. The vertices containing the endpoints, 3, 4, 5, and the compassed scribes, 1, 2, are represented by circle-shaped nodes. The vertex $m$ is the center of the diagram and shows directed edges intersecting vertices $a$, $b$, $c$, and is the subject of directed edges from 2, 1, 0.
+
+\paperfigure{extracted-figures/fig4.png}{0.72}{The adjacency list by cyclic graph.}
+
+The purpose of this algorithm is to create a domination of the available paths and the knowledge of said in the shortest amount of time~\cite{grandoni2006}. The computational efficiency of the algorithm is determined by an adjacency matrix, $i \times j$, where $M = [ n, m ]$ represents the vertices and edges. If the edges form the limit, it will take $O(1)$ time to test if an edge, $m$, is represented by the adjacency matrix as a coordinate wherein the bits in the partition are read, written, or searched in binary form. As partitions become filled, the form can expand into $p = 3$ dimensions to accommodate before subdivision. However, higher degrees of order add complexity as the number of edges increase. Complexity can increase very quickly if the system were to subdivide its spaces by a dimensional extension of the structure; the selection of the dimension around $m$ higher than $p = 2$ increases the weight of operations on the vertices and edges as agents are traversing more paths. The algorithm is on the maximum order of $O(n^2)$ for undiscovered states since the rule insists each vertex is completely explored and that all incident edges have been visited. Searches, either breadth-first or depth-first, performed on the algorithm are in $O(n + m)$ time.
+
+The structure containing partitions has the following features to offer the application layer:
+
+\begin{enumerate}
+\item Partition addressing: stored as a location given by coordinates $\{(i, j, k) : x\}$. Since the system knows how the triangles were constructed, it can retrace edges to find each of the vertices.
+\item Partition resolution: the size of the blocks is arbitrary address storage where the number of spaces and sequential numbering would be determined by properties of the physical memory. Further iterations, the addition of vertex edges between vertices, can be constructed in $\Theta(d_i)$ time where $d_i$ is the degree of the $i$th vertex.
+\item Expense of access operations by assigning access vertex $v_x$ to an input-output controller.
+\item It describes the state values of any operation in terms of its spatial model and known dependencies of adjacency.
+\item Is a closed and well-defined system with a venter represented by $m$ which interacts with all vertices as the center of mass of the object.
+\end{enumerate}
+
+\section{Conclusion}
+
+This paper described a geometric algorithm capable of the ability to self-organize a computational map suitable for data partitioning.
+
+The methodology of modeling the algorithm illustrates how data manipulation systems can be architecturally arranged based on weights of information flow from a sensor array or other data-intensive service using a geometric structure with a center point of symmetry. It illustrates this by imposing stability at each of the structure's vertices and knowledge of pathways between the outer vertices and the center of mass. The alteration of the behavior of the object by making corrections to the strategy of data addressing and storage is an optimization technique.
+
+The simplicity in the representation of drawing relative to the spaces makes this geometric algorithm appealing. Further vertices are added as the number of sub-triangles inside the numbered edges increase since at least one edge is known within the subdivided addressable space, similar to a Sierpinski carpet containing the Cantor set in two dimensions.
+
+The author proposes the geometric algorithm illustrated in this paper is suitable as a governing algorithm, similar in form and function of DNA cores and RNA assemblers in organic systems, a set of procedural primitives for artificial life constructs in a machine.
+
+\begin{thebibliography}{99}
+
+\bibitem{ashby1957}
+W.~R. Ashby,
+\textit{An Introduction to Cybernetics},
+Chapman \& Hall, Ltd., London, 1957.
+
+\bibitem{simula1999}
+O.~Simula et al.,
+``Analysis and modeling of complex systems using the self-organizing map,''
+\textit{Neuro-Fuzzy Techniques for Intelligent Information Systems} (1999): 3--22.
+
+\bibitem{guerin2004}
+S.~Guerin and D.~Kunkle,
+``Emergence of constraint in self-organizing systems,''
+\textit{Nonlinear Dynamics, Psychology, and Life Sciences},
+Vol.~8, No.~2, pp.~131--46, 2004.
+
+\bibitem{pattee1995}
+H.~H. Pattee,
+``Artificial life needs a real epistemology,''
+\textit{Lecture Notes in Computer Science, Proceedings of the Third European Conference on Advances in Artificial Life},
+Vol.~929, pp.~23--38, 1995.
+
+\bibitem{netz1999}
+R.~Netz,
+\textit{The Shaping of Deduction in Greek Mathematics: A Study in Cognitive History},
+Cambridge University Press, Cambridge, 1999.
+
+\bibitem{graham1972}
+R.~L. Graham,
+``An efficient algorithm for determining the convex hull of a planar set,''
+\textit{Information Processing Letters},
+Vol.~1, pp.~132--33, 1972.
+
+\bibitem{toussaint1992}
+G.~Toussaint,
+``What is computational geometry?''
+\textit{Proceedings IEEE},
+Vol.~80, No.~9, pp.~1347--63, 1992.
+
+\bibitem{shamos1975}
+M.~I. Shamos,
+``Geometric complexity,''
+\textit{Proc. 7th ACM Symposium on the Theory of Computing},
+pp.~224--33, 1975.
+
+\bibitem{ruffa2002}
+A.~Ruffa,
+``The generalized method of exhaustion,''
+\textit{International Journal of Mathematics and Mathematical Sciences},
+Vol.~31, No.~6, pp.~345--51, 2002.
+
+\bibitem{knuth1969}
+D.~E. Knuth,
+\textit{The Art of Computer Programming},
+Vol.~2. Addison-Wesley, Upper Saddle River, New Jersey, 1969.
+
+\bibitem{dorst2002}
+L.~Dorst and S.~Mann,
+``Geometric algebra: A computational framework for geometrical applications,''
+\textit{IEEE Computer Graphics and Applications},
+Vol.~22, No.~3, pp.~24--31, 2002.
+
+\bibitem{vonneumann1966}
+J.~Von Neumann,
+\textit{The Theory of Self-Reproducing Automata},
+University of Illinois Press, Urbana, 1966.
+
+\bibitem{hartenstein2008}
+R.~Hartenstein,
+``The von Neumann syndrome and the CS education dilemma,''
+\textit{The International Workshop on Applied Reconfigurable Computing (ARC 2008)},
+Mar.~2008.
+
+\bibitem{orlin2010}
+J.~Orlin et al.,
+``A faster algorithm for the single source shortest path problem with few distinct positive lengths,''
+\textit{Journal of Discrete Algorithms},
+Vol.~8, Iss.~2, pp.~189--98, Jun.~2010.
+
+\bibitem{angelini2012}
+P.~Angelini et al.,
+``Testing the simultaneous embeddability of two graphs whose intersection is a biconnected or connected graph,''
+\textit{Journal of Discrete Algorithms},
+Vol.~14, pp.~150--72, Jul.~2012.
+
+\bibitem{skiena1998}
+S.~Skiena,
+\textit{The Algorithm Design Manual},
+Springer-Verlag, New York, 1998.
+
+\bibitem{grandoni2006}
+F.~Grandoni,
+``A note on the complexity of minimum dominating set,''
+\textit{Journal of Discrete Algorithms},
+Vol.~4, Iss.~2, pp.~209--14, Jun.~2006.
+
+\end{thebibliography}
+
+\end{document}
